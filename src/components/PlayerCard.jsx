@@ -28,9 +28,6 @@ function PlayerCard({ player }) {
         <div className="row ">
           <div>
             <ButtonCapacity player={player} />
-            <ButtonCapacity player={player} />
-            <ButtonCapacity player={player} />
-            <ButtonCapacity player={player} />
           </div>
         </div>
       </div>
