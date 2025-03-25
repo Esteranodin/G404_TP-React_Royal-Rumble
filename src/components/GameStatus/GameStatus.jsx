@@ -1,10 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { resetGame } from '../../features/fight/fightSlice';
 import './GameStatus.css';
+import { selectGameStatus } from '../../features/fight/fightSelectors';
 
 function GameStatus() {
   const dispatch = useDispatch();
-  const gameStatus = useSelector(state => state.fight.gameStatus);
+  const gameStatus = useSelector(selectGameStatus);
   
   if (gameStatus === "playing") {
     return null;

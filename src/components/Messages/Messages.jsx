@@ -1,27 +1,20 @@
-import { useSelector } from "react-redux";
-import "./Messages.css";
+import React from 'react';
+import { useMessages } from '../../features/fight/hooks/useMessages';
+import './Messages.css';
 
-
-function Messages() {
-  const gameMessages = useSelector(state => state.fight.combatMessages);
-
+const CombatMessages = () => {
+  const { messages } = useMessages();
+  
   return (
     <div className="combat-log">
-      <h4>Journal de combat</h4>
-      {gameMessages.length === 0 ? (
-        <p>Le combat n'a pas encore commencé...</p>
-      ) : (
-        <ul>
-          {gameMessages.map((message, index) => (
-            <li key={index} className={message.includes("rate") ? "miss-message" : "hit-message"}>
-              {message}
-            </li>
-          ))}
-        </ul>
-      )}
+      <h3>Journal de combat</h3>
+      <ul>
+        {messages.map((message, index) => (
+          <li key={index}>{message}</li>
+        ))}
+      </ul>
     </div>
-  )
+  );
+};
 
-}
-
-export default Messages;
+export default React.memo(CombatMessages);

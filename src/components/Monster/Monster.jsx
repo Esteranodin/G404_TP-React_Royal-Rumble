@@ -1,11 +1,12 @@
 import './Monster.css';
 import ProgressBar from "../ProgressBar/ProgressBar";
 import { useSelector } from 'react-redux';
+import { selectMonster } from '../../features/fight/fightSelectors';
 
 
 function Monster() {
 
-const monster = useSelector((state) => state.fight.monster);
+const monster = useSelector(selectMonster);
 
   return (
     <section>

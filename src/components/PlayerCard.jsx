@@ -1,11 +1,11 @@
 import ButtonCapacity from "./ButtonCapacity/ButtonCapacity";
 import ProgressBar from "./ProgressBar/ProgressBar";
 
-function PlayerCard({ player }) {
+function PlayerCard({ player, isActive }) {
   return (
     <div
       key={player.id}
-      className="col-sm-3 card center"
+      className={`col-sm-3 card center ${isActive ? 'selected' : ''}`}
       id={`joueur${player.id}`}
     >
       <div className="card-body text-center">
