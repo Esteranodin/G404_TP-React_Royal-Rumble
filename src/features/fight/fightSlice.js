@@ -7,15 +7,18 @@ import { createCombatMessage } from "../../utils/messageUtils";
 
 const initialState = {
     players: [
-        { name: "Pepie", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 1 },
-        { name: "Oliv", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 2 },
-        { name: "Prune", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 3 },
-        { name: "Tom", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 4 },
+        { name: "Thorgar", class: "Guerrier", pv: 150, pvMax: 150, mana: 20, manaMax: 20, id: 1, icon: "fa-shield-alt" },
+        { name: "Lyandra", class: "Archer", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 2, icon: "fa-bow-arrow" },
+        { name: "Eldryn", class: "Mage", pv: 80, pvMax: 80, mana: 50, manaMax: 50, id: 3, icon: "fa-hat-wizard" },
+        { name: "Darius", class: "Paladin", pv: 130, pvMax: 130, mana: 40, manaMax: 40, id: 4, icon: "fa-hammer" },
+        
     ],
     monster: {
-        name: "Ménade",
-        pv: 200,
-        pvMax: 200,
+        name: "Ancien Dragon - Nalargwen",
+        icon: "fa-dragon",
+        pv: 250,
+        pvMax: 250,
+        type: "dragon"
     },
 
     currentTurn: {

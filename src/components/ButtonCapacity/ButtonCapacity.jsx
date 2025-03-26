@@ -4,9 +4,14 @@ import { attacksConfig } from '../../features/fight/attacksConfig';
 import './ButtonCapacity.css';
 
 const ButtonCapacity = ({ player }) => {
+  // Filtrer les attaques disponibles pour la classe du joueur
+  const availableAttacks = attacksConfig.filter(attack => 
+    attack.classes.includes(player.class)
+  );
+
   return (
     <div className="button-container">
-      {attacksConfig.map((attack, index) => {
+      {availableAttacks.map((attack, index) => {
         const { 
           handleAttack, 
           isDisabled, 
@@ -20,7 +25,7 @@ const ButtonCapacity = ({ player }) => {
         return (
           <button 
             key={index}
-            className={`btn ${attack.icon} ${buttonDisabled ? 'disabled' : ''} ${notEnoughMana ? 'no-mana' : ''}`}
+            className={`btn ${attack.healing ? 'btn-healing' : ''} ${buttonDisabled ? 'disabled' : ''} ${notEnoughMana ? 'no-mana' : ''}`}
             onClick={handleAttack}
             disabled={buttonDisabled}
             title={notEnoughMana ? "Pas assez de mana!" : ""}

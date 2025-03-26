@@ -11,14 +11,6 @@ export function damageRandom(min, max) {
 }
 
 
-export function getAttackResultMessage(damage) {
-  if (damage === 0) {
-    return "Le monstre rate son attaque !";
-  }
-  return `Le monstre contre-attaque et inflige ${damage} points de dégâts !`;
-}
-
-
 /**
  * Vérifie si le joueur a gagné (monstre vaincu)
  * @param {Object} monster - État du monstre

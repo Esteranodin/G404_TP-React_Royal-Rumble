@@ -46,6 +46,7 @@ export function useAttack(player, attackType) {
       return;
     }
     
+    // Code existant pour les attaques normales
     const damage = calculateDamage();
     
     // Ajouter le message d'attaque

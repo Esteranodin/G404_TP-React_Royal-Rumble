@@ -9,12 +9,8 @@ export const selectActivePlayer = (state) => {
   const activePlayerId = state.fight.currentTurn.playerId;
   return state.fight.players.find(player => player.id === activePlayerId);
 };
-// export const selectAlivePlayers = (state) => 
-//   state.fight.players.filter(player => player.pv > 0);
 
 export const selectMonster = (state) => state.fight.monster;
-
-// export const selectMonsterPV = (state) => state.fight.monster.pv;
 
 export const selectGameStatus = (state) => state.fight.gameStatus;
 
@@ -22,8 +18,6 @@ export const selectGameStatus = (state) => state.fight.gameStatus;
 export const selectCombatMessages = (state) => state.fight.combatMessages;
 
 export const selectShouldClearMessages = (state) => state.fight.shouldClearMessages;
-
-// export const selectCurrentTurnNumber = (state) => state.fight.currentTurn.turnNumber;
 
 export const selectCurrentPlayerId = (state) => state.fight.currentTurn.playerId;
 

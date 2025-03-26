@@ -6,6 +6,43 @@ export const handlePlayerAttack = (state, damage, manaCost, attackType) => {
   const currentPlayer = state.players.find(p => p.id === state.currentTurn.playerId);
   const messages = [];
   
+  // conversion d'énergie
+  if (attackType === "energyConversion") {
+    const pvLost = 10; 
+    const manaGained = 15;
+    
+    if (currentPlayer.pv <= pvLost) {
+      return { success: false, messages };
+    }
+    
+    // Appliquer la perte de PV et le gain de mana
+    currentPlayer.pv = Math.max(1, currentPlayer.pv - pvLost);
+    currentPlayer.mana = Math.min(currentPlayer.manaMax, currentPlayer.mana + manaGained);
+    
+    messages.push(createCombatMessage('ATTACK', 'energyConversion', currentPlayer.name, pvLost, manaGained));
+    
+    return { success: true, messages, currentPlayer };
+  }
+  
+  // Guérison 
+  if (attackType === "sacredLight") {
+    if (currentPlayer.mana < manaCost) {
+      return { success: false, messages };
+    }
+    
+    currentPlayer.mana -= manaCost;
+    
+    // Calculer la guérison (entre 15 et 25 PV)
+    const healAmount = Math.floor(Math.random() * 11) + 15;
+    
+    // Appliquer la guérison
+    currentPlayer.pv = Math.min(currentPlayer.pvMax, currentPlayer.pv + healAmount);
+    
+    messages.push(createCombatMessage('ATTACK', 'sacredLight', currentPlayer.name, healAmount));
+    
+    return { success: true, messages, currentPlayer };
+  }
+  
   // Vérifier et déduire le mana si nécessaire
   if (manaCost > 0) {
     if (currentPlayer.mana < manaCost) {

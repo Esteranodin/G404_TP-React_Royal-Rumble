@@ -7,5 +7,5 @@ export const clearMessagesWithDelay = (roundNumber) => (dispatch) => {
     dispatch(clearMessages());
     // Ajout du message de début de round après le nettoyage
     dispatch(addMessage(createCombatMessage('SYSTEM', 'roundStart', roundNumber)));
-  }, 3000); 
+  }, 10000); 
 };

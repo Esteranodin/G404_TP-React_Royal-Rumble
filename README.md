@@ -28,3 +28,8 @@ To get started with this project, follow these steps:
     ```bash
     npm run dev
     ```
+
+## Notre pour plus tard
+
+    Possible évolution : système de création de personnages, ajouter plusieurs types de monstres, implémenter un système d'inventaire
+    ==> refactorisation plus modulaire en séparant dans plusieurs slices 

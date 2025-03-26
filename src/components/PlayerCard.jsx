@@ -4,12 +4,14 @@ import ProgressBar from "./ProgressBar/ProgressBar";
 function PlayerCard({ player, isActive }) {
   return (
     <div
-      key={player.id}
       className={`col-sm-3 card center ${isActive ? 'selected' : ''}`}
       id={`joueur${player.id}`}
     >
       <div className="card-body text-center">
         <h5 className="card-title">{player.name}</h5>
+        <h6 className="card-subtitle mb-2 text-muted">
+          <i className={`fas ${player.icon}`}></i> {player.class}
+        </h6>
         <ProgressBar
           pv={player.pv}
           pvMax={player.pvMax}

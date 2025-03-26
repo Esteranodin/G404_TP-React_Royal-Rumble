@@ -3,10 +3,16 @@ import ProgressBar from "../ProgressBar/ProgressBar";
 import { useSelector } from 'react-redux';
 import { selectMonster } from '../../features/fight/fightSelectors';
 
-
 function Monster() {
-
-const monster = useSelector(selectMonster);
+  const monster = useSelector(selectMonster);
+  
+  // Image du monstre
+  const getMonsterImage = () => {
+    switch(monster.type) {
+      case 'dragon':
+        return "../../assets/dragon.jpg"; 
+    }
+  };
 
   return (
     <section>
@@ -14,20 +20,20 @@ const monster = useSelector(selectMonster);
         <div className="row">
           <div className="card-monstre col-sm-12">
             <div id="monsterCard">
+              <h3 className="monster-name">{monster.name}</h3>
               <div className="text-center">
                 <div className="row">
-                  <div className="col-sm-2 offset-sm-3">
+                  <div className="col-sm-6 offset-sm-3">
                     <span
                       className="badge badge-danger ml-2 "
                       id="degatSpanMonster"
                     ></span>
                     <img
-                      className="img-fluid"
-                      src="http://res.publicdomainfiles.com/pdf_view/67/13925387417373.png"
-                      alt="monster"
+                      className="img-fluid monster-image"
+                      src={getMonsterImage()}
+                      alt={monster.name}
                     />
                   </div>
-
                   <div id="comboOnMonster" className="col-sm-6"></div>
                 </div>
               </div>

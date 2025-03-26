@@ -1,3 +1,21 @@
 .card-monstre {
   margin-top: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+}
+
+.monster-name {
+  font-family: 'fantasy', cursive;
+  color: rgb(255, 69, 0);
+  font-size: 2rem;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.monster-image {
+  max-height: 300px;
+  margin: 0 auto;
+  filter: drop-shadow(2px 4px 6px black);
 }

@@ -1,7 +1,60 @@
 .btn {
-  padding: 0.1em 0.2rem !important ;
+  margin: 5px;
+  padding: 0.3em 0.6rem !important;
+  font-family: 'fantasy', cursive;
+  transition: all 0.3s ease;
+  background-image: linear-gradient(to bottom, #4b6cb7, #182848);
+  color: white;
+  border: 1px solid #0a1530;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn i {
+  margin-right: 5px;
+}
+
+.btn-healing {
+  background-image: linear-gradient(to bottom, #56ab2f, #a8e063);
 }
 
 .fa-bomb {
-  color: black;
+  color: orange;
+}
+
+.fa-fire, .fa-fire-alt {
+  color: #ff5722;
+}
+
+.fa-shield-alt, .fa-sword {
+  color: #b0bec5;
+}
+
+.fa-hat-wizard {
+  color: #7986cb;
+}
+
+.fa-radiation {
+  color: #9c27b0;
+}
+
+.fa-sun, .fa-hand-holding-medical {
+  color: #ffeb3b;
+}
+
+.no-mana {
+  opacity: 0.5;
+}
+
+.disabled {
+  cursor: not-allowed;
+}
+
+.manaShow {
+  color: #29b6f6;
+  font-weight: bold;
 }

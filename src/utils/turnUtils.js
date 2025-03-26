@@ -14,7 +14,7 @@ export const getNextPlayer = (players, currentTurn) => {
 };
 
 
-export const handleRoundEnd = (state, messages) => {
+export const handleRoundEnd = (state) => {
   const alivePlayers = state.players.filter(player => player.pv > 0);
   
   if (state.gameStatus === "playing" && alivePlayers.length > 0) {
