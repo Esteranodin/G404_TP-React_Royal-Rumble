@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { applyDamageToMonster, applyDamageToPlayer, damageRandom } from "../../utils/gamePlay";
+import { applyDamageToMonster, applyDamageToPlayer, damageRandom } from "../../utils/gamePlayUtils";
+import { getNextPlayer, handleRoundEnd, startNewRound } from "../../utils/turnUtils";
+import { handlePlayerAttack, handleCounterAttack, handleMonsterSpecialAttack } from "../../utils/attackUtils";
 import { createCombatMessage } from "../../utils/messageUtils";
 
 
@@ -46,71 +48,27 @@ export const fightSlice = createSlice({
         },
 
         attack: (state, action) => {
+            // logique complexe extraites dans des utils // optimisation 
             const { damage, attackType, manaCost = 0 } = action.payload;
-            const currentPlayer = getCurrentPlayer(state);
 
-            if (manaCost > 0 && currentPlayer.mana < manaCost) {
-                return;
-            }
+            // attaque du joueur via les utlitaires de gestion des attaques 
+            const attackResult = handlePlayerAttack(state, damage, manaCost, attackType);
+            if (!attackResult.success) return;
 
-            if (manaCost > 0) {
-                currentPlayer.mana -= manaCost;
-            }
+            state.combatMessages = [...state.combatMessages, ...attackResult.messages];
 
-            const statusMessage = applyDamageToMonster(state, damage);
-            if (statusMessage) {
-                state.combatMessages = [...state.combatMessages, statusMessage];
-            }
-
-            // Attaque opportunité monstre
-            if (state.monster.pv > 0 && state.gameStatus === "playing") {
-
-                const damageBack = damageRandom(3, 8);
-                if (damageBack > 0) {
-                    const messageBack = applyDamageToPlayer(state, damageBack, currentPlayer.id);
-                    state.combatMessages = [...state.combatMessages, createCombatMessage('MONSTER', 'counterAttack', currentPlayer.name, damageBack)];
-
-                    if (messageBack) {
-                        state.combatMessages = [...state.combatMessages, messageBack];
-                    }
-                } else {
-                    state.combatMessages = [...state.combatMessages, createCombatMessage('MONSTER', 'missedAttack')];
-                }
-            }
+            // contre attaque monstre
+            const counterAttackMessages = handleCounterAttack(state, attackResult.currentPlayer);
+            state.combatMessages = [...state.combatMessages, ...counterAttackMessages];
 
             // Passer au tour suivant
             fightSlice.caseReducers.nextTurn(state);
         },
 
         monsterAttack: (state) => {
-
-            const alivePlayers = state.players.filter(player => player.pv > 0);
-
-            if (alivePlayers.length > 0) {
-                // Afficher les joueurs vivants pour débogage
-
-                // Joueur vivant au hasard
-                const randomIndex = Math.floor(Math.random() * alivePlayers.length);
-                const targetPlayer = alivePlayers[randomIndex];
-
-                const damageBase = damageRandom(3, 8);
-                const finalDamage = damageBase === 0 ? 0 : damageBase * 2;
-
-                state.combatMessages = [...state.combatMessages,
-                finalDamage === 0
-                    ? createCombatMessage('MONSTER', 'bigMissedAttack', targetPlayer.name)
-                    : createCombatMessage('MONSTER', 'bigAttack', targetPlayer.name, finalDamage)
-                ];
-
-                const statusMessage = applyDamageToPlayer(state, finalDamage, targetPlayer.id);
-
-                // Si l'attaque a changé le statut du jeu, ajouter le message correspondant
-                if (statusMessage) {
-                    state.combatMessages = [...state.combatMessages, statusMessage];
-                }
-            }
+            const messages = handleMonsterSpecialAttack(state);
+            state.combatMessages = [...state.combatMessages, ...messages];
         },
-
 
         resetGame: (state) => {
             // Réinitialiser les joueurs
@@ -142,36 +100,24 @@ export const fightSlice = createSlice({
                 state.currentTurn.playersPlayed.push(state.currentTurn.playerId);
             }
 
-            // Ceux qui n'ont pas encore joué round + en vie
-            const alivePlayers = state.players.filter(player => player.pv > 0);
-            const remainingPlayers = alivePlayers.filter(
-                player => !state.currentTurn.playersPlayed.includes(player.id)
-            );
-
+            // joueurs restants pour round
+            const { remainingPlayers, alivePlayers } = getNextPlayer(state.players, state.currentTurn);
 
             if (remainingPlayers.length === 0) {
-
-                if (state.gameStatus === "playing" && alivePlayers.length > 0) {
+                // Fin du round
+                if (handleRoundEnd(state)) {
                     state.combatMessages = [...state.combatMessages, createCombatMessage('SYSTEM', 'turnMonster')];
-
-                    // Exécuter l'attaque spéciale du monstre de fin de round
                     fightSlice.caseReducers.monsterAttack(state);
                 }
 
                 // Commencer un nouveau round
-                state.currentTurn.roundNumber++;
-                state.currentTurn.playersPlayed = [];
-
-                state.shouldClearMessages = true;
-
-                // Prendre le premier joueur vivant pour le nouveau round
-                if (alivePlayers.length > 0) {
-                    state.currentTurn.playerId = alivePlayers[0].id;
+                const newRoundPlayer = startNewRound(state);
+                if (newRoundPlayer) {
                     state.currentTurn.turnNumber++;
-                    state.combatMessages = [...state.combatMessages, createCombatMessage('SYSTEM', 'turnChange', alivePlayers[0].name)];
+                    state.combatMessages = [...state.combatMessages, createCombatMessage('SYSTEM', 'turnChange', newRoundPlayer)];
                 }
             } else {
-                // Sinon, passer au joueur suivant qui n'a pas encore joué
+                // joueur suivant qui n'a pas encore joué
                 state.currentTurn.playerId = remainingPlayers[0].id;
                 state.currentTurn.turnNumber++;
                 state.combatMessages = [...state.combatMessages, createCombatMessage('SYSTEM', 'turnChange', remainingPlayers[0].name)];
@@ -180,9 +126,6 @@ export const fightSlice = createSlice({
     },
 });
 
-const getCurrentPlayer = (state) => {
-    return state.players.find(p => p.id === state.currentTurn.playerId);
-};
 
 export const {
     addMessage,

@@ -1,7 +1,3 @@
-/**
- * Génère des dégâts aléatoires + une probabilité de 20% de rater l'attaque (renvoie 0)
- **/
-
 export function damageRandom(min, max) {
  
   const missOpportunity = Math.random();
@@ -14,9 +10,7 @@ export function damageRandom(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-/**
- * Fonction pour obtenir un message selon le résultat de l'attaque
- */
+
 export function getAttackResultMessage(damage) {
   if (damage === 0) {
     return "Le monstre rate son attaque !";

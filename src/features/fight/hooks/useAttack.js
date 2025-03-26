@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { attack } from '../fightSlice';
 import { selectCurrentPlayerId, selectGameStatus } from '../fightSelectors';
 import { attacksConfig } from '../attacksConfig';
-import { damageRandom } from '../../../utils/gamePlay';
+import { damageRandom } from '../../../utils/gamePlayUtils';
 import { useMessages } from './useMessages';
 
 /**
@@ -26,11 +26,11 @@ export function useAttack(player, attackType) {
   
   // Déterminer si le bouton doit être désactivé
   const isPlayerTurn = currentPlayerId === player.id;
-  const isGamePlaying = gameStatus === "playing";
+  const isgamePlayUtilsing = gameStatus === "playing";
   const isPlayerAlive = player.pv > 0;
   const hasEnoughMana = player.mana >= manaCost;
   
-  const isDisabled = !isPlayerTurn || !isGamePlaying || !isPlayerAlive;
+  const isDisabled = !isPlayerTurn || !isgamePlayUtilsing || !isPlayerAlive;
   
   // Fonction pour calculer les dégâts
   const calculateDamage = useCallback(() => {
