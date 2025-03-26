@@ -8,8 +8,8 @@ import { useMessages } from './useMessages';
 
 /**
  * Hook personnalisé pour gérer les attaques
- * @param {Object} player - Le joueur qui attaque
- * @param {string} attackType - Le type d'attaque (punch, sword, etc.)
+ * @param {Object} player - joueur 
+ * @param {string} attackType - attaques
  * @returns {Object} - Les fonctions et états pour gérer l'attaque
  */
 export function useAttack(player, attackType) {

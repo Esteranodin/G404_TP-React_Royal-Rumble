@@ -22,6 +22,8 @@ export const selectActivePlayer = (state) => {
 
 export const selectCombatMessages = (state) => state.fight.combatMessages;
 
+export const selectShouldClearMessages = (state) => state.fight.shouldClearMessages;
+
 // export const selectCurrentTurnNumber = (state) => state.fight.currentTurn.turnNumber;
 
 export const selectCurrentPlayerId = (state) => state.fight.currentTurn.playerId;

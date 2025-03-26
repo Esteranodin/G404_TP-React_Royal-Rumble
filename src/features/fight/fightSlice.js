@@ -25,6 +25,7 @@ const initialState = {
 
     gameStatus: "playing",
     combatMessages: [],
+    shouldClearMessages: false, // pour indiquer qd nettoyer messages
 };
 
 export const fightSlice = createSlice({
@@ -32,15 +33,16 @@ export const fightSlice = createSlice({
     initialState,
     reducers: {
         addMessage: (state, action) => {
-            state.combatMessages.unshift(action.payload);
-            // Limite le nombre de messages pour éviter des problèmes de performance
-            if (state.combatMessages.length > 50) {
-                state.combatMessages.pop();
-            }
+            state.combatMessages = [...state.combatMessages, action.payload];
         },
 
         clearMessages: (state) => {
             state.combatMessages = [];
+            state.shouldClearMessages = false;
+        },
+
+        setShouldClearMessages: (state, action) => {
+            state.shouldClearMessages = action.payload;
         },
 
         attack: (state, action) => {
@@ -57,7 +59,7 @@ export const fightSlice = createSlice({
 
             const statusMessage = applyDamageToMonster(state, damage);
             if (statusMessage) {
-                state.combatMessages.unshift(statusMessage);
+                state.combatMessages = [...state.combatMessages, statusMessage];
             }
 
             // Attaque opportunité monstre
@@ -66,13 +68,13 @@ export const fightSlice = createSlice({
                 const damageBack = damageRandom(3, 8);
                 if (damageBack > 0) {
                     const messageBack = applyDamageToPlayer(state, damageBack, currentPlayer.id);
-                    state.combatMessages.unshift(createCombatMessage('MONSTER', 'counterAttack', currentPlayer.name, damageBack));
+                    state.combatMessages = [...state.combatMessages, createCombatMessage('MONSTER', 'counterAttack', currentPlayer.name, damageBack)];
 
                     if (messageBack) {
-                        state.combatMessages.unshift(messageBack);
+                        state.combatMessages = [...state.combatMessages, messageBack];
                     }
                 } else {
-                    state.combatMessages.unshift(createCombatMessage('MONSTER', 'missedAttack'));
+                    state.combatMessages = [...state.combatMessages, createCombatMessage('MONSTER', 'missedAttack')];
                 }
             }
 
@@ -94,15 +96,17 @@ export const fightSlice = createSlice({
                 const damageBase = damageRandom(3, 8);
                 const finalDamage = damageBase === 0 ? 0 : damageBase * 2;
 
-               finalDamage === 0
-                    ? state.combatMessages.unshift(createCombatMessage('MONSTER', 'bigMissedAttack', targetPlayer.name))
-                    : state.combatMessages.unshift(createCombatMessage('MONSTER', 'bigAttack', targetPlayer.name, finalDamage));
+                state.combatMessages = [...state.combatMessages,
+                finalDamage === 0
+                    ? createCombatMessage('MONSTER', 'bigMissedAttack', targetPlayer.name)
+                    : createCombatMessage('MONSTER', 'bigAttack', targetPlayer.name, finalDamage)
+                ];
 
                 const statusMessage = applyDamageToPlayer(state, finalDamage, targetPlayer.id);
 
                 // Si l'attaque a changé le statut du jeu, ajouter le message correspondant
                 if (statusMessage) {
-                    state.combatMessages.unshift(statusMessage);
+                    state.combatMessages = [...state.combatMessages, statusMessage];
                 }
             }
         },
@@ -129,6 +133,7 @@ export const fightSlice = createSlice({
             // Réinitialiser le statut et les messages
             state.gameStatus = "playing";
             state.combatMessages = [createCombatMessage('SYSTEM', 'gameStart')];
+            state.shouldClearMessages = false;
         },
 
         nextTurn: (state) => {
@@ -147,7 +152,7 @@ export const fightSlice = createSlice({
             if (remainingPlayers.length === 0) {
 
                 if (state.gameStatus === "playing" && alivePlayers.length > 0) {
-                    state.combatMessages.unshift(createCombatMessage('SYSTEM', 'turnMonster'));
+                    state.combatMessages = [...state.combatMessages, createCombatMessage('SYSTEM', 'turnMonster')];
 
                     // Exécuter l'attaque spéciale du monstre de fin de round
                     fightSlice.caseReducers.monsterAttack(state);
@@ -156,19 +161,20 @@ export const fightSlice = createSlice({
                 // Commencer un nouveau round
                 state.currentTurn.roundNumber++;
                 state.currentTurn.playersPlayed = [];
-                state.combatMessages.unshift(createCombatMessage('SYSTEM', 'roundStart', state.currentTurn.roundNumber));
+
+                state.shouldClearMessages = true;
 
                 // Prendre le premier joueur vivant pour le nouveau round
                 if (alivePlayers.length > 0) {
                     state.currentTurn.playerId = alivePlayers[0].id;
                     state.currentTurn.turnNumber++;
-                    state.combatMessages.unshift(createCombatMessage('SYSTEM', 'turnChange', alivePlayers[0].name));
+                    state.combatMessages = [...state.combatMessages, createCombatMessage('SYSTEM', 'turnChange', alivePlayers[0].name)];
                 }
             } else {
                 // Sinon, passer au joueur suivant qui n'a pas encore joué
                 state.currentTurn.playerId = remainingPlayers[0].id;
                 state.currentTurn.turnNumber++;
-                state.combatMessages.unshift(createCombatMessage('SYSTEM', 'turnChange', remainingPlayers[0].name));
+                state.combatMessages = [...state.combatMessages, createCombatMessage('SYSTEM', 'turnChange', remainingPlayers[0].name)];
             }
         },
     },
@@ -181,6 +187,7 @@ const getCurrentPlayer = (state) => {
 export const {
     addMessage,
     clearMessages,
+    setShouldClearMessages,
     attack,
     monsterAttack,
     resetGame,
