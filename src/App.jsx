@@ -10,8 +10,12 @@ function App() {
       <header className="game-header">
         <h1 className="game-title">Legends of Mythia</h1>
       </header>
-      <Messages />
-      <Monster />
+      
+      <div className="battle-section">
+        <Monster />
+        <Messages />
+      </div>
+      
       <PlayerList />
       <GameStatus />
     </div>

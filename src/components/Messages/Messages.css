@@ -2,9 +2,9 @@
   border: var(--gb-border-width) solid var(--gb-ui-border);
   background-color: var(--gb-ui-bg);
   padding: var(--gb-spacing);
-  max-width: 400px;
-  margin: var(--gb-spacing) auto;
-  max-height: 200px;
+  flex: 1; 
+  min-width: 300px; 
+  max-height: 300px; 
   overflow-y: auto;
   box-shadow: var(--gb-spacing) var(--gb-spacing) 0 rgba(0, 0, 0, 0.5);
 }
@@ -26,4 +26,41 @@
   padding: 4px;
   margin-bottom: 4px;
   border: 1px solid var(--gb-medium);
+}
+
+.player-turn-message {
+  font-size: 0.9em !important;
+  font-weight: bold;
+  color: var(--gb-light);
+  background-color: var(--gb-dark);
+  border: 2px solid var(--gb-light) !important;
+  padding: 8px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.player-turn-message::before {
+  content: "👑 ";
+  margin-right: 4px;
+}
+
+
+.round-start-message {
+  font-size: 0.9em !important;
+  background-color: var(--gb-darkest);
+  border: 2px dashed var(--gb-medium) !important;
+  text-align: center;
+  letter-spacing: 1px;
+  padding: 8px !important;
+}
+
+.monster-turn-message {
+  font-size: 0.85em !important;
+  background-color: rgba(231, 110, 85, 0.2); 
+  border: 2px solid var(--gb-health) !important;
+  color: var(--gb-health);
+  text-align: center;
+  padding: 6px !important;
 }

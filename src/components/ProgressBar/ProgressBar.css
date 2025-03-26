@@ -1,14 +1,17 @@
+.progress-container {
+  margin: var(--gb-spacing) 0;
+}
+
 .progress {
-  height: 20px;
+  height: 12px;
   background-color: var(--gb-darkest);
   border: var(--gb-border-width) solid var(--gb-ui-border);
-  margin: var(--gb-spacing) 0;
+  padding: 0;
 }
 
 .progress-bar {
   height: 100%;
   background-color: var(--gb-medium);
-  text-align: center;
   transition: width 0.3s;
 }
 
@@ -20,8 +23,13 @@
   background-color: var(--gb-mana);
 }
 
-.icon-text {
-  color: var(--gb-darkest);
+.progress-text {
+  text-align: center;
+  margin-top: 4px;
   font-size: 0.6em;
-  letter-spacing: -1px;
+}
+
+.icon-text {
+  color: var(--gb-light);
+  letter-spacing: -0.5px;
 }

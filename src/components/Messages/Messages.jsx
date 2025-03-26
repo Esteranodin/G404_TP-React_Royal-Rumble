@@ -14,7 +14,7 @@ const CombatMessages = () => {
   const { messages } = useMessages();
   const messagesEndRef = useRef(null);
 
-  // verifie si délenche nettoyage asynchrone des messages
+  // Vérifie si déclenche nettoyage asynchrone des messages
   useEffect(() => {
     if (shouldClearMessages) {
       dispatch(setShouldClearMessages(false));
@@ -28,12 +28,33 @@ const CombatMessages = () => {
     }
   }, [messages]);
 
+  const isPlayerTurnMessage = (message) => {
+    return message.startsWith("C'est au tour de");
+  };
+
+  const isRoundStartMessage = (message) => {
+    return message.startsWith("🔄 Round");
+  };
+
+  const isMonsterTurnMessage = (message) => {
+    return message.startsWith("🔥 C'est au tour du monstre");
+  };
+
   return (
     <div className="combat-log">
       <h3>Journal de combat</h3>
       <ul>
         {messages.map((message, index) => (
-          <li key={index}>{message}</li>
+          <li 
+            key={index} 
+            className={`
+              ${isPlayerTurnMessage(message) ? 'player-turn-message' : ''}
+              ${isRoundStartMessage(message) ? 'round-start-message' : ''}
+              ${isMonsterTurnMessage(message) ? 'monster-turn-message' : ''}
+            `}
+          >
+            {message}
+          </li>
         ))}
       </ul>
       <div ref={messagesEndRef}></div>

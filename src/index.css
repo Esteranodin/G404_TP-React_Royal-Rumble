@@ -21,11 +21,11 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  image-rendering: pixelated; /* Pour accentuer l'effet pixel */
+  image-rendering: pixelated; 
 }
 
 html, body {
-  font-family: 'Press Start 2P', monospace; /* Police pixel */
+  font-family: 'Press Start 2P', monospace; 
   background-color: var(--gb-background);
   color: var(--gb-text);
   line-height: 1.5;
@@ -46,5 +46,4 @@ button:hover:not(:disabled) {
 
 button:disabled {
   opacity: 0.5;
-  cursor: not-allowed;
 }

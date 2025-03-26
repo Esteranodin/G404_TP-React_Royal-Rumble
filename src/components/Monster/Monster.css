@@ -1,11 +1,14 @@
 .monster-card {
-  margin: var(--gb-spacing);
+  margin: 0; 
   border: var(--gb-border-width) solid var(--gb-ui-border);
   background-color: var(--gb-ui-bg);
   padding: var(--gb-spacing);
+  flex: 1; 
   box-shadow: var(--gb-spacing) var(--gb-spacing) 0 rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  min-width: 300px; 
 }
-
 .monster-name {
   font-family: 'Press Start 2P', monospace;
   color: var(--gb-light);
@@ -16,8 +19,8 @@
 
 .monster-image {
   max-height: 200px;
-  margin: 0 auto;
+  align-self: center; 
   image-rendering: pixelated;
-  filter: grayscale(1) brightness(0.8) contrast(1.2); /* Effet Game Boy */
+  filter: grayscale(1) brightness(0.8) contrast(1.2);
   border: var(--gb-border-width) solid var(--gb-medium);
 }
