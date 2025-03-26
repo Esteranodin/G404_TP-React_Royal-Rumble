@@ -1,24 +1,50 @@
-body {
-  background-color: #232323;
+:root {
+  --gb-darkest: #0f380f;   
+  --gb-dark: #306230;      
+  --gb-medium: #8bac0f;   
+  --gb-light: #9bbc0f;   
+
+  --gb-background: var(--gb-darkest);
+  --gb-text: var(--gb-light);
+  --gb-ui-border: var(--gb-medium);
+  --gb-ui-bg: var(--gb-dark);
+
+  --gb-health: #e76e55;   
+  --gb-mana: #7e9ecc;    
+
+  --gb-spacing: 8px;
+  --gb-border-width: 4px;
+  --gb-border-radius: 0;
 }
 
-html,
-body {
-  font-family: "Hind", sans-serif;
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
+  image-rendering: pixelated; /* Pour accentuer l'effet pixel */
 }
 
-img {
-  max-width: 100%;
-  height: 250px;
-  display: block;
+html, body {
+  font-family: 'Press Start 2P', monospace; /* Police pixel */
+  background-color: var(--gb-background);
+  color: var(--gb-text);
+  line-height: 1.5;
 }
 
-h3 {
-  text-align: center;
-  font-weight: 400;
-  margin-bottom: 0;
+button {
+  font-family: 'Press Start 2P', monospace;
+  background-color: var(--gb-dark);
+  color: var(--gb-light);
+  border: var(--gb-border-width) solid var(--gb-medium);
+  padding: var(--gb-spacing);
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background-color: var(--gb-medium);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

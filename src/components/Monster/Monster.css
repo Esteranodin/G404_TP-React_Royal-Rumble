@@ -1,21 +1,23 @@
-.card-monstre {
-  margin-top: 10px;
-  background-color: rgba(0, 0, 0, 0.7);
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+.monster-card {
+  margin: var(--gb-spacing);
+  border: var(--gb-border-width) solid var(--gb-ui-border);
+  background-color: var(--gb-ui-bg);
+  padding: var(--gb-spacing);
+  box-shadow: var(--gb-spacing) var(--gb-spacing) 0 rgba(0, 0, 0, 0.5);
 }
 
 .monster-name {
-  font-family: 'fantasy', cursive;
-  color: rgb(255, 69, 0);
-  font-size: 2rem;
-  margin-bottom: 15px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  font-family: 'Press Start 2P', monospace;
+  color: var(--gb-light);
+  text-align: center;
+  margin-bottom: var(--gb-spacing);
+  text-transform: uppercase;
 }
 
 .monster-image {
-  max-height: 300px;
+  max-height: 200px;
   margin: 0 auto;
-  filter: drop-shadow(2px 4px 6px black);
+  image-rendering: pixelated;
+  filter: grayscale(1) brightness(0.8) contrast(1.2); /* Effet Game Boy */
+  border: var(--gb-border-width) solid var(--gb-medium);
 }

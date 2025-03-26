@@ -35,13 +35,13 @@ export const checkDefeat = (players) => {
  * @returns {string|null} - Nouveau message de combat à ajouter, ou null si aucun
  */
 export const updateGameStatus = (state) => {
-  // Vérifier la victoire
+
   if (checkVictory(state.monster)) {
     state.gameStatus = "victory";
     return "Victoire ! Le monstre a été vaincu !";
   }
   
-  // Vérifier la défaite
+
   if (checkDefeat(state.players)) {
     state.gameStatus = "defeat";
     return "Défaite ! Tous les joueurs sont KO !";
@@ -57,10 +57,9 @@ export const updateGameStatus = (state) => {
  * @returns {string|null} - Message à ajouter au journal de combat
  */
 export const applyDamageToMonster = (state, damage) => {
-  // Appliquer les dégâts
+
   state.monster.pv = Math.max(0, state.monster.pv - damage);
   
-  // Vérifier et mettre à jour l'état du jeu
   return updateGameStatus(state);
 };
 
@@ -77,7 +76,6 @@ export const applyDamageToPlayer = (state, damage, playerId) => {
   if (targetPlayer) {
     targetPlayer.pv = Math.max(0, targetPlayer.pv - damage);
     
-    // Vérifier et mettre à jour l'état du jeu
     return updateGameStatus(state);
   }
   

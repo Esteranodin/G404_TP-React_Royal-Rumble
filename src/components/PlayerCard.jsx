@@ -1,38 +1,36 @@
 import ButtonCapacity from "./ButtonCapacity/ButtonCapacity";
 import ProgressBar from "./ProgressBar/ProgressBar";
+import "../App.css";
 
 function PlayerCard({ player, isActive }) {
   return (
     <div
-      className={`col-sm-3 card center ${isActive ? 'selected' : ''}`}
-      id={`joueur${player.id}`}
+      className={`player-card ${isActive ? 'selected' : ''}`}
     >
-      <div className="card-body text-center">
-        <h5 className="card-title">{player.name}</h5>
-        <h6 className="card-subtitle mb-2 text-muted">
+      <div className="player-info">
+        <h5 className="player-name">{player.name}</h5>
+        <h6 className="player-class">
           <i className={`fas ${player.icon}`}></i> {player.class}
         </h6>
-        <ProgressBar
-          pv={player.pv}
-          pvMax={player.pvMax}
-          faType="fa-heart"
-          barName=" : pv "
-          bgType="bg-danger"
-        />
-        <ProgressBar
-          pv={player.mana}
-          pvMax={player.manaMax}
-          faType="fa-fire-alt"
-          barName=" : mana "
-        />
-
-        <span className="badge badge-danger ml-2 " id="degatSpanJ1"></span>
-        <div className="row ">
-          <div>
-            <ButtonCapacity player={player} />
-          </div>
-        </div>
       </div>
+      
+      <ProgressBar
+        pv={player.pv}
+        pvMax={player.pvMax}
+        faType="fa-heart"
+        barName=" : pv"
+        type="health"
+      />
+      
+      <ProgressBar
+        pv={player.mana}
+        pvMax={player.manaMax}
+        faType="fa-fire-alt"
+        barName=" : mana"
+        type="mana"
+      />
+
+      <ButtonCapacity player={player} />
     </div>
   );
 }

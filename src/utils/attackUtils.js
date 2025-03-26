@@ -6,7 +6,7 @@ export const handlePlayerAttack = (state, damage, manaCost, attackType) => {
   const currentPlayer = state.players.find(p => p.id === state.currentTurn.playerId);
   const messages = [];
   
-  // conversion d'énergie
+
   if (attackType === "energyConversion") {
     const pvLost = 10; 
     const manaGained = 15;
@@ -31,11 +31,8 @@ export const handlePlayerAttack = (state, damage, manaCost, attackType) => {
     }
     
     currentPlayer.mana -= manaCost;
-    
-    // Calculer la guérison (entre 15 et 25 PV)
+  
     const healAmount = Math.floor(Math.random() * 11) + 15;
-    
-    // Appliquer la guérison
     currentPlayer.pv = Math.min(currentPlayer.pvMax, currentPlayer.pv + healAmount);
     
     messages.push(createCombatMessage('ATTACK', 'sacredLight', currentPlayer.name, healAmount));

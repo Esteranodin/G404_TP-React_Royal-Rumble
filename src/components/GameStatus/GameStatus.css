@@ -3,26 +3,31 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  border-radius: 10px;
-  z-index: 100;
-  text-align: center;
-  color: white;
+  background-color: var(--gb-ui-bg);
+  border: var(--gb-border-width) solid var(--gb-ui-border);
+  padding: calc(var(--gb-spacing) * 2);
   width: 80%;
-  max-width: 500px;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.7);
+  z-index: 100;
 }
 
-.game-status.victory {
-  background-color: rgba(0, 128, 0, 0.8);
+.game-status h2 {
+  font-size: 1em;
+  margin-bottom: var(--gb-spacing);
 }
 
-.game-status.defeat {
-  background-color: rgba(128, 0, 0, 0.8);
+.game-status.victory h2 {
+  color: var(--gb-light);
+}
+
+.game-status.defeat h2 {
+  color: var(--gb-health);
 }
 
 .game-status button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
+  margin-top: calc(var(--gb-spacing) * 2);
+  width: 100%;
+  padding: var(--gb-spacing);
 }

@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { applyDamageToMonster, applyDamageToPlayer, damageRandom } from "../../utils/gamePlayUtils";
 import { getNextPlayer, handleRoundEnd, startNewRound } from "../../utils/turnUtils";
 import { handlePlayerAttack, handleCounterAttack, handleMonsterSpecialAttack } from "../../utils/attackUtils";
 import { createCombatMessage } from "../../utils/messageUtils";
@@ -14,7 +13,7 @@ const initialState = {
         
     ],
     monster: {
-        name: "Ancien Dragon - Nalargwen",
+        name: "Nalargwen le dragon ancien",
         icon: "fa-dragon",
         pv: 250,
         pvMax: 250,
@@ -51,7 +50,7 @@ export const fightSlice = createSlice({
         },
 
         attack: (state, action) => {
-            // logique complexe extraites dans des utils // optimisation 
+            // logique complexe extraites dans des utils -- optimisation 
             const { damage, attackType, manaCost = 0 } = action.payload;
 
             // attaque du joueur via les utlitaires de gestion des attaques 

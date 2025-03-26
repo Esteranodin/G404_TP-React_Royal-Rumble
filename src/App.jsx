@@ -6,18 +6,15 @@ import PlayerList from './components/PlayerList'
 
 function App() {
   return (
-    <div className="App">
-        <header className="game-header">
-          <h1 className="game-title">Legends of Mythia</h1>
-        </header>
-        <Messages />
-        <Monster />
-        <br></br>
-        <section className="container-fluid">
-          <PlayerList />
-        </section >
-        <GameStatus />
-      </div>
+    <div className="game-container">
+      <header className="game-header">
+        <h1 className="game-title">Legends of Mythia</h1>
+      </header>
+      <Messages />
+      <Monster />
+      <PlayerList />
+      <GameStatus />
+    </div>
   )
 }
 

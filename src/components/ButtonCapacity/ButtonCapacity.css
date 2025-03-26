@@ -1,60 +1,36 @@
-.btn {
-  margin: 5px;
-  padding: 0.3em 0.6rem !important;
-  font-family: 'fantasy', cursive;
-  transition: all 0.3s ease;
-  background-image: linear-gradient(to bottom, #4b6cb7, #182848);
-  color: white;
-  border: 1px solid #0a1530;
-  border-radius: 5px;
+/* ButtonCapacity.css */
+.button-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--gb-spacing);
+  margin-top: var(--gb-spacing);
 }
 
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+.btn {
+  position: relative;
+  padding: var(--gb-spacing);
+  text-transform: uppercase;
+  font-size: 0.7em;
+  letter-spacing: -0.5px;
+  box-shadow: var(--gb-spacing) var(--gb-spacing) 0 rgba(0, 0, 0, 0.3);
 }
 
 .btn i {
-  margin-right: 5px;
+  margin-right: var(--gb-spacing);
 }
 
 .btn-healing {
-  background-image: linear-gradient(to bottom, #56ab2f, #a8e063);
-}
-
-.fa-bomb {
-  color: orange;
-}
-
-.fa-fire, .fa-fire-alt {
-  color: #ff5722;
-}
-
-.fa-shield-alt, .fa-sword {
-  color: #b0bec5;
-}
-
-.fa-hat-wizard {
-  color: #7986cb;
-}
-
-.fa-radiation {
-  color: #9c27b0;
-}
-
-.fa-sun, .fa-hand-holding-medical {
-  color: #ffeb3b;
+  background-color: var(--gb-dark);
+  border-color: var(--gb-medium);
 }
 
 .no-mana {
   opacity: 0.5;
 }
 
-.disabled {
-  cursor: not-allowed;
-}
-
-.manaShow {
-  color: #29b6f6;
-  font-weight: bold;
+.mana-cost {
+  display: block;
+  font-size: 0.6em;
+  color: var(--gb-mana);
+  margin-top: 4px;
 }

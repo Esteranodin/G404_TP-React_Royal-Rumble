@@ -6,7 +6,6 @@ import { setShouldClearMessages } from '../../features/fight/fightSlice';
 import { clearMessagesWithDelay } from '../../features/fight/fightActions';
 import './Messages.css';
 
-
 const CombatMessages = () => {
   const dispatch = useDispatch();
   const shouldClearMessages = useSelector(selectShouldClearMessages);
@@ -30,13 +29,14 @@ const CombatMessages = () => {
   }, [messages]);
 
   return (
-    <div className="journal">
+    <div className="combat-log">
       <h3>Journal de combat</h3>
       <ul>
         {messages.map((message, index) => (
           <li key={index}>{message}</li>
         ))}
       </ul>
+      <div ref={messagesEndRef}></div>
     </div>
   );
 };

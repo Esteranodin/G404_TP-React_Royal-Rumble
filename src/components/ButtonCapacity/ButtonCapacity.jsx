@@ -25,13 +25,13 @@ const ButtonCapacity = ({ player }) => {
         return (
           <button 
             key={index}
-            className={`btn ${attack.healing ? 'btn-healing' : ''} ${buttonDisabled ? 'disabled' : ''} ${notEnoughMana ? 'no-mana' : ''}`}
+            className={`btn ${attack.healing ? 'btn-healing' : ''} ${notEnoughMana ? 'no-mana' : ''}`}
             onClick={handleAttack}
             disabled={buttonDisabled}
             title={notEnoughMana ? "Pas assez de mana!" : ""}
           >
             {attack.icon && <i className={attack.icon}></i>} {attack.name}
-            {manaCost > 0 && <span className="manaShow"> ({manaCost} mana)</span>}
+            {manaCost > 0 && <span className="mana-cost">({manaCost} mana)</span>}
           </button>
         );
       })}

@@ -3,18 +3,17 @@ import { useSelector } from "react-redux";
 import { selectAllPlayers, selectActivePlayer } from "../features/fight/fightSelectors";
 
 function PlayerList() {
-
   const players = useSelector(selectAllPlayers);
   const activePlayer = useSelector(selectActivePlayer);
 
-  /* object.values() permet de transformer un objet en tableau */
   return (
-    <div className="row">
-      {Object.values(players).map((player) => (
+    <div className="player-list">
+      {players.map((player) => (
         <PlayerCard
-         key = {player.id}
-         player = {player}
-         isActive = {player.id === activePlayer?.id} />
+          key={player.id}
+          player={player}
+          isActive={player.id === activePlayer?.id} 
+        />
       ))}
     </div>
   );

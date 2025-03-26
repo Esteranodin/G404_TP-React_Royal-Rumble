@@ -1,18 +1,27 @@
-.icon-text {
-  color: white;
+.progress {
+  height: 20px;
+  background-color: var(--gb-darkest);
+  border: var(--gb-border-width) solid var(--gb-ui-border);
+  margin: var(--gb-spacing) 0;
 }
 
 .progress-bar {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -ms-flex-pack: center;
-  justify-content: center;
-  color: #fff;
-  text-align: center;
-  white-space: nowrap;
-  background-color: #007bff;
-  transition: width 0.6s ease;
   height: 100%;
+  background-color: var(--gb-medium);
+  text-align: center;
+  transition: width 0.3s;
+}
+
+.progress-bar.health {
+  background-color: var(--gb-health);
+}
+
+.progress-bar.mana {
+  background-color: var(--gb-mana);
+}
+
+.icon-text {
+  color: var(--gb-darkest);
+  font-size: 0.6em;
+  letter-spacing: -1px;
 }

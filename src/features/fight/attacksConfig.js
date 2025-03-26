@@ -13,7 +13,7 @@ export const attacksConfig = [
   
   // Attaques de Guerrier
   {
-    name: "Coup d'épée",
+    name: "Coup d'epee",
     actionType: "swordStrike",
     minDamage: 10,
     maxDamage: 15,
@@ -42,7 +42,7 @@ export const attacksConfig = [
   
   // Attaques d'Archer
   {
-    name: "Tir précis",
+    name: "Tir precis",
     actionType: "preciseShot",
     minDamage: 12,
     maxDamage: 18,
@@ -60,7 +60,7 @@ export const attacksConfig = [
     classes: ["Archer"]
   },
   {
-    name: "Tir empoisonné",
+    name: "Tir empoisonne",
     actionType: "poisonedShot",
     minDamage: 5,
     maxDamage: 10,
@@ -90,7 +90,7 @@ export const attacksConfig = [
     classes: ["Mage"]
   },
     {
-    name: "Conversion d'énergie",
+    name: "Conversion d'energie",
     actionType: "energyConversion",
     minDamage: 0,
     maxDamage: 0,
@@ -121,7 +121,7 @@ export const attacksConfig = [
     classes: ["Paladin"]
   },
   {
-    name: "Lumière sacrée",
+    name: "Lumière sacree",
     actionType: "sacredLight",
     minDamage: 0,
     maxDamage: 0,
