@@ -19,7 +19,6 @@ function GameStatus() {
           : "☠️ Défaite ! Tous les joueurs sont KO !"}
       </h2>
       <button 
-        className="btn btn-primary"
         onClick={() => dispatch(resetGame())}
       >
         Nouvelle partie

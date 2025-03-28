@@ -26,8 +26,3 @@ export const selectIsPlayerTurn = (state, playerId) =>
 
 export const selectRoundNumber = (state) => 
   state.fight.currentTurn.roundNumber;
-
-export const selectHasEnoughMana = (state, playerId, manaCost) => {
-  const player = selectPlayerById(state, playerId);
-  return player && player.mana >= manaCost;
-};
