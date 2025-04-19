@@ -32,12 +32,18 @@
   background-color: var(--gb-ui-bg);
   padding: var(--gb-spacing);
   margin: var(--gb-spacing);
+  box-sizing: border-box;
   box-shadow: var(--gb-spacing) var(--gb-spacing) 0 rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .player-card.selected {
   border-color: var(--gb-light);
   background-color: var(--gb-dark);
+  animation: highlight 1s infinite alternate ease-in-out;
+  z-index: 1;
 }
 
 .player-info {
@@ -64,12 +70,24 @@
   margin-top: var(--gb-spacing);
 }
 
-
-
-/* --------------- Responsive--------------- */
+/* --------------- Responsive --------------- */
 
 @media (max-width: 768px) {
   .battle-section {
     flex-direction: column;
   }
 }
+
+/* --------------- Animations --------------- */
+/* 
+@keyframes highlight {
+  from {
+    box-shadow: var(--gb-spacing) var(--gb-spacing) 0 rgba(0, 0, 0, 0.5);
+    transform: translateY(0);
+  }
+
+  to {
+    box-shadow: var(--gb-spacing) var(--gb-spacing) 15px rgba(135, 15, 172, 0.6);
+    transform: translateY(-3px);
+  }
+} */

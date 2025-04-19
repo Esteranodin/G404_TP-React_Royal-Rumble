@@ -1,4 +1,10 @@
-/* ButtonCapacity.css */
+.capacity-buttons {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+}
+
 .button-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -13,6 +19,7 @@
   font-size: 0.7em;
   letter-spacing: -0.5px;
   box-shadow: var(--gb-spacing) var(--gb-spacing) 0 rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
 }
 
 .btn i {
@@ -22,6 +29,16 @@
 .btn-healing {
   background-color: var(--gb-dark);
   border-color: var(--gb-medium);
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--gb-spacing) calc(var(--gb-spacing) + 2px) 0 rgba(0, 0, 0, 0.4);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: var(--gb-spacing) calc(var(--gb-spacing) - 1px) 0 rgba(0, 0, 0, 0.3);
 }
 
 .no-mana {

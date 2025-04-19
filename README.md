@@ -13,9 +13,6 @@ To get started with this project, follow these steps:
 1. Clone the repository
 
 2. Navigate into the project directory
-    ```bash
-    cd royal-rumble-setup
-    ```
 
 3. Install dependencies
     ```bash
@@ -29,7 +26,7 @@ To get started with this project, follow these steps:
     npm run dev
     ```
 
-## Notre pour plus tard
+## Note pour plus tard
 
     Possible évolution : système de création de personnages, ajouter plusieurs types de monstres, implémenter un système d'inventaire
     ==> refactorisation plus modulaire en séparant dans plusieurs slices 
